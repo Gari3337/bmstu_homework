@@ -1,5 +1,7 @@
 #include "h1.h"
 
-int func(int a) {
-    return a;
+
+void hello_func() {
+	std::cout << "Hello World" << std::endl;
+
 }
