@@ -2,7 +2,10 @@
 
 #pragma once
 
+#include <algorithm>
 #include <iostream>
+#include <utility>
+#include <list>
 
 namespace bmstu {
 template<typename T>
@@ -307,4 +310,4 @@ class list {
   node *tail_ = nullptr;
   node *head_ = nullptr;
 };
-}
+}  //namespace bmstu

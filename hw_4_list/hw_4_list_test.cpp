@@ -1,10 +1,9 @@
 // Copyright 2023 <fleurs>
 
 #include <gtest/gtest.h>
-
-#include <iostream>
 #include <set>
-
+#include <string>
+#include <vector>
 #include "hw_4_list.h"
 
 TEST(ListTest, 1DefaultListTest) {
