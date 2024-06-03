@@ -146,21 +146,14 @@ class list {
     }
   }
   list(list &&other) noexcept { swap(other); }
-//  template<typename Type>
-//  void push_back(const Type &value) {
-//    node *new_last = new node(tail_->prev_node_, value, tail_);
-//    tail_->prev_node_->next_node_ = new_last;
-//    tail_->prev_node_ = new_last;
-//    ++size_;
-//  }
-  template<typename Type>
-  void push_back(const Type &value) {
-      node *last = tail_->prev_node_;
-      node *new_last = new node(last, value, tail_);
-      last->next_node_ = new_last;
-      tail_->prev_node_ = new_last;
-      ++size_;
-  }
+    template<typename Type>
+    void push_back(const Type &value) {
+        node *last = tail_->prev_node_;
+        node *new_last = new node(last, value, tail_);
+        last->next_node_ = new_last;
+        tail_->prev_node_ = new_last;
+        ++size_;
+    }
 
     template<typename Type>
     void push_front(const Type &value) {
