@@ -1,5 +1,6 @@
 #pragma once
 
+#include <utility>
 #include <exception>
 #include <type_traits>
 #include "cstdint"
@@ -57,14 +58,14 @@ class optional {
     return *(static_cast<T *>(static_cast<void *>(&data_[0])));
   }
 
-  T &value() const &{
+  T &value() const & {
     if (!is_initialized_) {
       throw bad_optional_access();
     }
-    return reinterpret_cast<T &>(*(T *) (&data_[0]));
+    return reinterpret_cast<T &>(*(T *)(&data_[0]));
   }
 
-  T &&value() &&{
+  T &&value() && {
     if (!is_initialized_) {
       throw bad_optional_access();
     }
@@ -121,11 +122,11 @@ class optional {
     return *this;
   }
 
-  T &operator*() &{
+  T &operator*() & {
     return *(static_cast<T *>(static_cast<void *>(&data_[0])));
   }
 
-  const T &operator*() const &{
+  const T &operator*() const & {
     return *(static_cast<const T *>(static_cast<void *>(&data_[0])));
   }
 
@@ -175,4 +176,4 @@ class optional {
   alignas(T) uint8_t data_[sizeof(T)];
   bool is_initialized_ = false;
 };
-}
+}  // namespace bmstu
