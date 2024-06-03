@@ -1,8 +1,8 @@
-
 #pragma once
-#include "cstdint"
+
 #include <exception>
 #include <type_traits>
+#include "cstdint"
 
 namespace bmstu {
 class bad_optional_access : public std::exception {
@@ -18,12 +18,12 @@ class optional {
  public:
   optional() = default;
 
-  optional(const T &value) {
+  explicit optional(const T &value) {
     is_initialized_ = true;
     new(&data_[0])T(value);
   }
 
-  optional(T &&value) {
+  explicit optional(T &&value) {
     is_initialized_ = true;
     new(&data_[0])T(std::move(value));
   }
@@ -50,9 +50,8 @@ class optional {
     }
   }
 
-  T &value() &{
-    if (!is_initialized_)
-    {
+  T &value() & {
+    if (!is_initialized_) {
       throw bad_optional_access();
     }
     return *(static_cast<T *>(static_cast<void *>(&data_[0])));

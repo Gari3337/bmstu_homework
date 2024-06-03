@@ -1144,6 +1144,28 @@ class WithoutDefaultConstructor {
   int number;
 };
 
+#pragma pack(1)
+struct my_struct{
+    bool a;
+    bool b;
+};
+#pragma pop
+
+TEST(Pointers, Dummy) {
+    int a = 5;
+    int b = 6;
+    my_struct aa;
+    my_struct * aa_ptr = &aa;
+    std::cout << aa_ptr << "\n";
+    std::cout << aa_ptr + 1 << "\n";
+
+//    std::cout << sizeof(a) << "\n";
+//    std::cout << sizeof(&a) << "\n";
+//    std::cout << sizeof(a_ptr) << "\n";
+//    a_ptr = nullptr;
+//    a_ptr = (int*)16;
+//    int b = 6;
+}
 // TEST(DummyVectorTest, 1Disability) {
 //  uint8_t *ptr = new uint8_t[sizeof(WithoutDefaultConstructor) * 10];
 //  WithoutDefaultConstructor *wdc = new(ptr) WithoutDefaultConstructor(1);

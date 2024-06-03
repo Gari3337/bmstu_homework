@@ -310,4 +310,4 @@ class list {
   node *tail_ = nullptr;
   node *head_ = nullptr;
 };
-}  //namespace bmstu
+} //namespace bmstu
