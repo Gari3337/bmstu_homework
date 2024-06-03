@@ -57,7 +57,6 @@ class list {
       node_ = node_->prev_node_;
       return *this;
     }
-    
     list_iterator operator++(int) {
       list_iterator tmp = *this;
       ++(*this);
