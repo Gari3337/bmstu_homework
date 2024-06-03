@@ -58,12 +58,18 @@ class optional {
     return *(static_cast<T *>(static_cast<void *>(&data_[0])));
   }
 
-  T &value() const & {
-    if (!is_initialized_) {
-      throw bad_optional_access();
+//  T &value() const & {
+//    if (!is_initialized_) {
+//      throw bad_optional_access();
+//    }
+//      return *(reinterpret_cast<T *>(&data_[0]));
+//  }
+
+    const T &value() const &{
+        if (!is_initialized_) throw bad_optional_access();
+        return reinterpret_cast<const T &>(*(T *) &data_[0]);
     }
-      return reinterpret_cast<T &>(*(T *) (&data_[0]));
-  }
+
 
   T &&value() && {
     if (!is_initialized_) {
