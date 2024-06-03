@@ -22,7 +22,6 @@ class list {
  public:
   template<typename value_t>
   struct list_iterator {
-    friend class node;
     using iterator_category = std::bidirectional_iterator_tag;
     using value_type = value_t;
     using difference_type = ptrdiff_t;
@@ -41,7 +40,7 @@ class list {
       return node_->value;
     }
 
-    list_iterator &operator++() {
+    list_iterator &operator++(int) {
       assert(node_ != nullptr);
       node_ = node_->next_node_;
       return *this;
@@ -52,21 +51,21 @@ class list {
       return &(node_->value);
     }
 
-    list_iterator &operator--() {
+    list_iterator &operator--(int) {
       assert(node_ != nullptr);
       node_ = node_->prev_node_;
       return *this;
     }
-    list_iterator operator++(int) {
-      list_iterator tmp = *this;
+    list_iterator operator++() {
+      list_iterator copy = *this;
       ++(*this);
-      return tmp;
+      return copy;
     }
 
-    list_iterator operator--(int) {
-      list_iterator tmp = *this;
+    list_iterator operator--() {
+      list_iterator copy = *this;
       --(*this);
-      return tmp;
+      return copy;
     }
 
     template<typename Integer>
@@ -96,7 +95,7 @@ class list {
     list_iterator &operator=(const list_iterator &other) = default;
 
     bool operator==(const list_iterator<const T> &other) const {
-      return node_ == other.node_;
+      return (node_->next_node_==other.node_->next_node_ && node_->prew_node_==other.node_->prew_node_ && node_->value = other.node_->value);
     }
 
     bool operator==(const list_iterator<T> &other) const {
@@ -147,25 +146,34 @@ class list {
     }
   }
   list(list &&other) noexcept { swap(other); }
+//  template<typename Type>
+//  void push_back(const Type &value) {
+//    node *new_last = new node(tail_->prev_node_, value, tail_);
+//    tail_->prev_node_->next_node_ = new_last;
+//    tail_->prev_node_ = new_last;
+//    ++size_;
+//  }
   template<typename Type>
   void push_back(const Type &value) {
-    node *last = tail_->prev_node_;
-    node *new_last = new node(last, value, tail_);
-    last->next_node_ = new_last;
-    tail_->prev_node_ = new_last;
-    ++size_;
+      node *last = tail_->prev_node_;
+      node *new_last = new node(last, value, tail_);
+      last->next_node_ = new_last;
+      tail_->prev_node_ = new_last;
+      ++size_;
   }
-  template<typename Type>
-  void push_front(const Type &value) {
-    node *first = head_->next_node_;
-    node *new_first = new node(head_, value, first);
-    first->prev_node_ = new_first;
-    head_->next_node_ = new_first;
-    ++size_;
-  }
-  [[nodiscard]] bool empty() const noexcept {
-    return size_ == 0;
-  }
+
+    template<typename Type>
+    void push_front(const Type &value) {
+        node *first = head_->next_node_;
+        node *new_first = new node(head_, value, first);
+        first->prev_node_ = new_first;
+        head_->next_node_ = new_first;
+        ++size_;
+    }
+    [[nodiscard]] bool empty() const noexcept {
+        return size_ == 0;
+    }
+
   ~list() {
     clear();
     delete head_;
@@ -219,6 +227,7 @@ class list {
     }
     return current->value;
   }
+
   T &operator[](size_t pos) {
     node *current = head_->next_node_;
     for (size_t i = 0; i < pos; ++i) {
