@@ -53,6 +53,8 @@ namespace bmstu {
                 return *this;
             }
 
+            // postfix
+
             list_iterator operator++() {
                 list_iterator tmp = *this;
                 ++(*this);
