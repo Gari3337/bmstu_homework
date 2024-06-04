@@ -4,7 +4,7 @@
 
 namespace bmstu {
     template<typename T>
-    class list {
+    class list{
         struct node {
             node() = default;
             node(node *prev, const T &value, node *next)
@@ -52,8 +52,6 @@ namespace bmstu {
                 node_ = node_->prev_node_;
                 return *this;
             }
-
-            // postfix
 
             list_iterator operator++() {
                 list_iterator tmp = *this;
@@ -164,7 +162,7 @@ namespace bmstu {
         [[nodiscard]] bool empty() const noexcept {
             return size_ == 0;
         }
-        ~list() {  
+        ~list() {
             clear();
             delete head_;
             delete tail_;
