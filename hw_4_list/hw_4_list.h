@@ -7,7 +7,7 @@
 #include <utility>
 #include <list>
 
-namespace bmstu{
+namespace bmstu {
     template<typename T>
     class list {
         struct node {
@@ -114,7 +114,7 @@ namespace bmstu{
                 return node_ != other.node_;
             }
 
-        private:
+        private :
             list::node *node_ = nullptr;
         };
         using value_type = T;
@@ -292,7 +292,7 @@ namespace bmstu{
             return pos;
         }
 
-    private:
+    private :
         static bool lexicographical_compare_(const list<T> &l, const list<T> &r) {
             auto lb = l.begin();
             auto rb = r.begin();
@@ -312,4 +312,4 @@ namespace bmstu{
         node *tail_ = nullptr;
         node *head_ = nullptr;
     };
-}  // namespace bmstu
+};  // namespace bmstu
