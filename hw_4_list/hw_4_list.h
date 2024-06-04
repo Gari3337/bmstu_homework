@@ -2,9 +2,12 @@
 
 #pragma once
 
+#include <algorithm>
 #include <iostream>
+#include <utility>
+#include <list>
 
-namespace bmstu {
+namespace bmstu{
     template<typename T>
     class list {
         struct node {
@@ -16,7 +19,7 @@ namespace bmstu {
             node *prev_node_ = nullptr;
         };
 
-    public:
+    public :
         template<typename value_t>
         struct list_iterator {
             friend class node;
@@ -37,8 +40,6 @@ namespace bmstu {
                 assert(node_ != nullptr);
                 return node_->value;
             }
-
-            // prefix
 
             list_iterator &operator++() {
                 assert(node_ != nullptr);
@@ -96,11 +97,6 @@ namespace bmstu {
             }
 
             list_iterator &operator=(const list_iterator &other) = default;
-
-//    friend bool operator==(const list::list_iterator<T> &l,
-//                           const list::list_iterator<T> &r) {
-//      return l.node_ == r.node_;
-//    }
 
             bool operator==(const list_iterator<const T> &other) const {
                 return node_ == other.node_;
@@ -173,7 +169,7 @@ namespace bmstu {
         [[nodiscard]] bool empty() const noexcept {
             return size_ == 0;
         }
-        ~list() {  // TODO(fleurs): FIX ?
+        ~list() {
             clear();
             delete head_;
             delete tail_;
