@@ -1,10 +1,12 @@
+// Copyright 2023 <fleurs>
+
 #pragma once
 
 #include <iostream>
 
 namespace bmstu {
     template<typename T>
-    class list{
+    class list {
         struct node {
             node() = default;
             node(node *prev, const T &value, node *next)
@@ -36,7 +38,9 @@ namespace bmstu {
                 return node_->value;
             }
 
-            list_iterator &operator++(int) {
+            // prefix
+
+            list_iterator &operator++() {
                 assert(node_ != nullptr);
                 node_ = node_->next_node_;
                 return *this;
@@ -47,7 +51,7 @@ namespace bmstu {
                 return &(node_->value);
             }
 
-            list_iterator &operator--(int) {
+            list_iterator &operator--() {
                 assert(node_ != nullptr);
                 node_ = node_->prev_node_;
                 return *this;
@@ -55,13 +59,13 @@ namespace bmstu {
 
             // postfix
 
-            list_iterator operator++() {
+            list_iterator operator++(int) {
                 list_iterator tmp = *this;
                 ++(*this);
                 return tmp;
             }
 
-            list_iterator operator--() {
+            list_iterator operator--(int) {
                 list_iterator tmp = *this;
                 --(*this);
                 return tmp;
@@ -92,6 +96,11 @@ namespace bmstu {
             }
 
             list_iterator &operator=(const list_iterator &other) = default;
+
+//    friend bool operator==(const list::list_iterator<T> &l,
+//                           const list::list_iterator<T> &r) {
+//      return l.node_ == r.node_;
+//    }
 
             bool operator==(const list_iterator<const T> &other) const {
                 return node_ == other.node_;
@@ -164,7 +173,7 @@ namespace bmstu {
         [[nodiscard]] bool empty() const noexcept {
             return size_ == 0;
         }
-        ~list() {
+        ~list() {  // TODO(fleurs): FIX ?
             clear();
             delete head_;
             delete tail_;
