@@ -62,12 +62,24 @@ class optional {
 //    if (!is_initialized_) {
 //      throw bad_optional_access();
 //    }
-//      return *(reinterpret_cast<T *>(&data_[0]));
+//      return reinterpret_cast<T &>(*(T *) (&data_[0]));
 //  }
+//
+//   return *(reinterpret_cast<T *>(&data_[0]));
+//
+//    const T &value() const & {
+//        if (!is_initialized_) throw bad_optional_access();
+//        return reinterpret_cast<const T &>(*(T *) &data_[0]);
+//    }
 
-    const T &value() const & {
-        if (!is_initialized_) throw bad_optional_access();
-        return reinterpret_cast<const T &>(*(T *) &data_[0]);
+    T &value() const &{  // NOLINT
+        if (!is_initialized_) {
+            throw bad_optional_access();
+        }
+        // char* ptr = data_;
+        // void* data_ptr = ptr;
+        // T* type_ptr = data_ptr;
+        return reinterpret_cast<T &>(*(T *) (&data_[0]));  // NOLINT
     }
 
 
