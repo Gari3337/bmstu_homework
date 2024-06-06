@@ -19,7 +19,7 @@ namespace bmstu {
             node *prev_node_ = nullptr;
         };
 
-    public :
+    public:
         template<typename value_t>
         struct list_iterator {
             friend class node;
