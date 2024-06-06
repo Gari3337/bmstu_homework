@@ -311,4 +311,4 @@ namespace bmstu {
         node *tail_ = nullptr;
         node *head_ = nullptr;
     };
-}  //  namespace bmstu
+}  // namespace bmstu
