@@ -8,7 +8,7 @@
 
 namespace bmstu {
     template<typename T>
-    class list {
+    class list { // NOLINT
         struct node {
             node() = default;
             node(node *prev, const T &value, node *next)
