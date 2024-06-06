@@ -1,7 +1,6 @@
 // Copyright 2023 <fleurs>
 
 #pragma once
-
 #include <algorithm>
 #include <iostream>
 #include <utility>
